@@ -1,0 +1,3 @@
+Usando a função que verifica se um número é perfeito ou não, escreva um programa que encontra todos os números perfeitos no intervalo de 1 a 50000.
+
+Vou escrevendo a funcao que verifica se eh perfeito ou não.
