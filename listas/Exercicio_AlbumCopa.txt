@@ -1,0 +1,20 @@
+
+Faça um cadastro das figurinhas que representam jogadores do álbum...
+
+Figurinha:
+selecao: Brasil
+numero: 3
+nome: Eder Militão
+clube: Real Madrid
+peso: 85
+altura: 183
+quantidade: 1 <essa informacao nao precisa ser digitada>
+
+* Cadastra de figurinha
+* Consulta pela selecao
+* Consulta figurinhas que podem ser trocadas
+* Troca figurinha: Selecao + numero e depois vai informar
+    a figurinha que vc recebeu pela troca (selecao + numero + nome do jogador...)
+    e vai adicionar essa figurinha na lista do sistema.
+
+Crie um menu que permita executar cada uma das funcionalidades descritas.
