@@ -20,7 +20,7 @@ def busca_binaria(vet: list, x: int) -> int:
     return -1
 
 lista = []
-for i in range(3_000_000):
+for i in range(300_000):
     lista.append(i)
 
 ini = time.time()
