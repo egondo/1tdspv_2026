@@ -1,0 +1,28 @@
+[
+    {
+        "nome": "Computational Thinking",
+        "conteudo": [
+            "logica",
+            "decisao",
+            "loops"
+        ],
+        "professor": "Edu Gondo"
+    },
+    {
+        "nome": "Domain Driven Design",
+        "conteudo": [
+            "java",
+            "orientacao a objetos"
+        ],
+        "professor": "Thiago Yamamoto"
+    },
+    {
+        "nome": "Chatbot & IA",
+        "conteudo": [
+            "chatbot",
+            "watson",
+            "node red"
+        ],
+        "professor": "Erick Yamamoto"
+    }
+]

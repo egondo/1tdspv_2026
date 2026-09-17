@@ -1,0 +1,47 @@
+[
+    {
+        "placa": "MGH-6743",
+        "modelo": "HB20",
+        "ano": 2024,
+        "cor": "prata",
+        "marca": "Hyundai",
+        "km": 50000,
+        "valor": 180
+    },
+    {
+        "placa": "UPD-5F00",
+        "modelo": "Dolphin",
+        "ano": 2025,
+        "cor": "azul",
+        "marca": "BYD",
+        "km": 35000,
+        "valor": 250
+    },
+    {
+        "placa": "LTP-6523",
+        "modelo": "Polo",
+        "ano": 2023,
+        "cor": "preto",
+        "marca": "Volkswagen",
+        "km": 68000,
+        "valor": 200
+    },
+    {
+        "placa": "GEI-6302",
+        "modelo": "Dolphin",
+        "ano": 2024,
+        "cor": "branco",
+        "marca": "BYD",
+        "km": 37000,
+        "valor": 250
+    },
+    {
+        "placa": "FIT-0823",
+        "modelo": "320i",
+        "ano": 2024,
+        "cor": "vermelho",
+        "marca": "BMW",
+        "km": 18000,
+        "valor": 450
+    }
+]
