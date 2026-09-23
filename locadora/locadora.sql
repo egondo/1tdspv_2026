@@ -31,3 +31,10 @@ create table tb_locacao (
     Foreign Key (id_veiculo) REFERENCES tb_veiculo (id),
     Foreign Key (id_cliente) REFERENCES tb_cliente (id)
 );
+
+
+insert into tb_cliente(nome, telefone) VALUES('Edu Gondo', '(11) 837432');
+insert into tb_cliente(nome, telefone) VALUES('Thiago Yamamoto', '(11) 947352');
+insert into tb_cliente(nome, telefone) VALUES('Alexandre Faria', '(11) 8493543');
+insert into tb_cliente(nome, telefone) VALUES('Rose Almeida', '(11) 73495435');
+insert into tb_cliente(nome, telefone) VALUES('Donald Trump', '(11) 9348523');

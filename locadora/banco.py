@@ -22,7 +22,7 @@ def converte_carro(registro: tuple) -> dict:
     return car
 
 def recupera_veiculos() -> list:
-    sql = "SELECT id, marca, modelo, placa, ano, cor, km, valor FROM tb_cliente ORDER BY modelo"
+    sql = "SELECT id, marca, modelo, placa, ano, cor, km, valor FROM tb_veiculo ORDER BY modelo"
     
     lista =[]
 
@@ -35,4 +35,51 @@ def recupera_veiculos() -> list:
                 carro = converte_carro(info)
                 lista.append(carro)
     
+    return lista
+
+def recupera_clientes() -> list:
+    sql = "SELECT id, nome, telefone FROM tb_cliente ORDER BY nome"
+    lista =[]
+    with get_conexao() as con:
+        with con.cursor() as cur:
+            cur.execute(sql)
+            registros = cur.fetchall()
+            for info in registros:
+                #cada info, representa um carro que sera representado por um dicionario
+                cliente = {'id': info[0], 'nome': info[1], 'telefone': info[2]}
+                lista.append(cliente)
+    
+    return lista
+
+
+def insere_locacao(locacao: dict):
+    sql = "INSERT INTO tb_locacao(id_veiculo, id_cliente, status, retirada, entrega, valor, km) VALUES(:id_carro, :id_cliente, :status, to_date(:data_retirada, 'DD/MM/YYYY HH24:MI'), to_date(:data_devolucao, 'DD/MM/YYYY HH24:MI'), :valor, :km)"
+    with get_conexao() as con:
+        with con.cursor() as cur:
+            cur.execute(sql, locacao)
+        con.commit()
+
+
+def atualiza_locacao(locacao: dict):
+    sql = "UPDATE tb_locacao set id_veiculo=:id_carro, id_cliente = :id_cliente, status = :status, retirada = to_date(:data_retirada, 'DD/MM/YYYY HH24:MI'), entrega = to_date(:data_devolucao, 'DD/MM/YYYY HH24:MI'), valor = :valor, km=:km WHERE id=:id"
+    with get_conexao() as con:
+        with con.cursor() as cur:
+            cur.execute(sql, locacao)
+        con.commit()
+
+def recupera_locacoes(id_cliente: int) -> list:
+    sql = "SELECT l.id, to_char(l.retirada, 'DD/MM/YYYY HH24:MI'), to_char(l.entrega, 'DD/MM/YYYY HH24:MI'), l.valor, l.status, v.modelo, v.placa, c.nome, c.telefone, l.id_veiculo, l.id_cliente, l.km, l.valor FROM TB_LOCACAO l JOIN TB_VEICULO v ON l.id_veiculo = v.id JOIN TB_CLIENTE c ON l.id_cliente = c.id WHERE l.id_cliente = :id_cliente AND status = 'RESERVA'"
+
+    with get_conexao() as con:
+        with con.cursor() as cur:
+            param = {'id_cliente': id_cliente}
+            cur.execute(sql, param)
+            registros = cur.fetchall()
+
+    lista = []
+    for reg in registros:
+        loc = {
+            'id': reg[0], 'data_retirada': reg[1], 'data_devolucao': reg[2], 'valor': reg[3], 'status': reg[4], 'modelo': reg[5], 'placa': reg[6], 'nome': reg[7], 'telefone': reg[8], 'id_carro': reg[9], 'id_cliente': reg[10], 'km': reg[11], 'valor': reg[12]
+        }
+        lista.append(loc)
     return lista
