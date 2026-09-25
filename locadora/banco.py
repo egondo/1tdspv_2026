@@ -53,7 +53,7 @@ def recupera_clientes() -> list:
 
 
 def insere_locacao(locacao: dict):
-    sql = "INSERT INTO tb_locacao(id_veiculo, id_cliente, status, retirada, entrega, valor, km) VALUES(:id_carro, :id_cliente, :status, to_date(:data_retirada, 'DD/MM/YYYY HH24:MI'), to_date(:data_devolucao, 'DD/MM/YYYY HH24:MI'), :valor, :km)"
+    sql = "INSERT INTO tb_locacao(id_veiculo, id_cliente, status, retirada, entrega, valor, km) VALUES(:id_veiculo, :id_cliente, :status, to_date(:retirada, 'DD/MM/YYYY HH24:MI'), to_date(:entrega, 'DD/MM/YYYY HH24:MI'), :valor, :km)"
     with get_conexao() as con:
         with con.cursor() as cur:
             cur.execute(sql, locacao)
@@ -61,7 +61,7 @@ def insere_locacao(locacao: dict):
 
 
 def atualiza_locacao(locacao: dict):
-    sql = "UPDATE tb_locacao set id_veiculo=:id_carro, id_cliente = :id_cliente, status = :status, retirada = to_date(:data_retirada, 'DD/MM/YYYY HH24:MI'), entrega = to_date(:data_devolucao, 'DD/MM/YYYY HH24:MI'), valor = :valor, km=:km WHERE id=:id"
+    sql = "UPDATE tb_locacao set id_veiculo= :id_veiculo, id_cliente = :id_cliente, status = :status, retirada = to_date(:retirada, 'DD/MM/YYYY HH24:MI'), entrega = to_date(:entrega, 'DD/MM/YYYY HH24:MI'), valor = :valor, km= :km WHERE id= :id"
     with get_conexao() as con:
         with con.cursor() as cur:
             cur.execute(sql, locacao)
@@ -82,4 +82,19 @@ def recupera_locacoes(id_cliente: int) -> list:
             'id': reg[0], 'data_retirada': reg[1], 'data_devolucao': reg[2], 'valor': reg[3], 'status': reg[4], 'modelo': reg[5], 'placa': reg[6], 'nome': reg[7], 'telefone': reg[8], 'id_carro': reg[9], 'id_cliente': reg[10], 'km': reg[11], 'valor': reg[12]
         }
         lista.append(loc)
+    return lista
+
+
+def recupera_veiculos_locacao(data1: str, data2: str) -> list:
+    sql = '''select id, modelo, marca, placa, ano, valor, km, cor from tb_veiculo WHERE NOT ID IN (SELECT ID_VEICULO FROM TB_LOCACAO WHERE (to_date(:data1, 'DD/MM/YYYY HH24:MI') between retirada and entrega) OR (to_date(:data2, 'DD/MM/YYYY HH24:MI') between retirada and entrega))'''
+    lista =[]
+    param = {'data1': data1, 'data2': data2}
+    with get_conexao() as con:
+        with con.cursor() as cur:
+            cur.execute(sql, param)
+            registros = cur.fetchall()
+            for info in registros:
+                carro = converte_carro(info)
+                lista.append(carro)
+    
     return lista
