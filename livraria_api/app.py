@@ -47,15 +47,35 @@ def cadastra_novo_livro():
 #Definir um método put
 @app.route("/api/v1/livros", methods=["PUT"])
 def altera_livro(id: int):
-    #implemente a logica de alteracao, nao e necessario logica de negocio
-    return None
+    livro = request.json
+    i = 0
+    alterou = False
+    while i < len(db.livros):
+        l = db.livros[i]
+        if l['id'] == id:
+            db.livros[i] = livro
+            alterou = True
+        i = i + 1
+
+    if alterado:
+        return {"title": "livro alterado com sucesso", 'status': 200}, 200
+    else:
+        return {"title": f"livro não foi alterado {id}", 'status': 404}, 404
+
 
 #Definir um método delete
 @app.route("/api/v1/livros", methods=["DELETE"])
 def apaga_livro(id: int):
-    #implemente a logica de alteracao, nao e necessario logica de negocio
-    return None
+    alterado = False
+    for i, livro in enumerate(db.livros):
+        if livro['id'] == id:
+            db.livros.pop(i)
+            alterado = True
 
-
+    if alterado:
+        return {"title": "livro removido com sucesso", 'status': 200}, 200
+    else:
+        return {"title": f"livro não encontrado {id}", 'status': 404}, 404
+        
 app.run(debug=True)
 
