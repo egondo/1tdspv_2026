@@ -45,7 +45,7 @@ def cadastra_novo_livro():
 
 
 #Definir um método put
-@app.route("/api/v1/livros", methods=["PUT"])
+@app.route("/api/v1/livros/<int:id>", methods=["PUT"])
 def altera_livro(id: int):
     livro = request.json
     i = 0
@@ -64,7 +64,7 @@ def altera_livro(id: int):
 
 
 #Definir um método delete
-@app.route("/api/v1/livros", methods=["DELETE"])
+@app.route("/api/v1/livros/<int:id>", methods=["DELETE"])
 def apaga_livro(id: int):
     alterado = False
     for i, livro in enumerate(db.livros):
