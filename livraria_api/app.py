@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import banco
 
 app = Flask(__name__)
+CORS(app, origins="*")
 
 @app.route("/api/v1/livros", methods=["POST"])
+@cross_origin()
 def cadastra_novo_livro():
     livro = request.json
     try:

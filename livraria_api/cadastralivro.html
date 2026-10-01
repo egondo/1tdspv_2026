@@ -67,7 +67,7 @@
             event.preventDefault();
 
             // Substitua pela URL da sua API ou endpoint de destino
-            const urlDestino = 'https://sua-api.com/endpoint';
+            const urlDestino = 'http://127.0.0.1:5000/api/v1/livros';
 
             // Coleta os dados dos campos do formulário
             const dados = {
@@ -94,8 +94,10 @@
                 });
 
                 if (resposta.ok) {
-                    divMensagem.textContent = 'Dados enviados com sucesso!';
+                    msg = await resposta.text();
+                    divMensagem.textContent = 'Dados enviados com sucesso! ' + msg;
                     divMensagem.className = 'mt-4 text-center text-sm font-medium text-green-600';
+
                     document.getElementById('meuFormulario').reset(); // Limpa o formulário
                 } else {
                     throw new Error('Erro ao enviar os dados.');
