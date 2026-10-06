@@ -1,11 +1,11 @@
 import banco
 
-partida = {
-    "mandante": "Vasco da Gama",
-    "visitante": "Cruzeiro",
-    "placar_m": 2,
-    "placar_v": 1
-}
+#partida = {
+#    "mandante": "Vasco da Gama",
+#    "visitante": "Cruzeiro",
+#    "placar_m": 2,
+#    "placar_v": 1
+#}
 
 def resolve_time(nome: str, vit: int, emp: int) -> dict:
     time = banco.recupera_time_nome(nome)
