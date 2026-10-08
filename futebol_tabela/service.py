@@ -21,7 +21,7 @@ def resolve_time(nome: str, vit: int, emp: int) -> dict:
 
 
 def cadastra_partida(partida: dict):
-    vit_mand = vit_vis = emp_mand = emp_visi = 0
+    vit_mand = vit_visi = emp_mand = emp_visi = 0
 
     if partida['placar_m'] > partida['placar_v']:
         vit_mand = 1
@@ -41,3 +41,13 @@ def cadastra_partida(partida: dict):
 
 def recupera_times():
     return banco.recupera_todos_times()
+
+
+if __name__ == "__main__":
+    partida = {
+        "mandante": "Vasco da Gama",
+        "visitante": "Cruzeiro",
+        "placar_m": 2,
+        "placar_v": 1
+    }
+    cadastra_partida(partida)

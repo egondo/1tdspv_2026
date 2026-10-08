@@ -58,12 +58,31 @@ def altera_time(time: dict):
 def recupera_todos_times() -> list:
     #Faço a consulta na tabela times, já calculando: pontos usando a formula: 3 * vitorias + empates, atribuo o nome "pontos" e ordeno em ordem descrescente o resultado da tabela pela coluna pontos
     #retorno a lista de times
-    pass
+    sql = "SELECT NOME, VITORIAS * 3 + EMPATES as PONTOS, VITORIAS, EMPATES, JOGOS - VITORIAS - EMPATES as DERROTAS, JOGOS FROM TIME ORDER BY PONTOS DESC"
+    with get_conexao() as con:
+        with con.cursor() as cur:
+            cur.execute(sql)
+            lista = cur.fetchall()
+
+    resp = []
+    for tupla in lista:
+        time = {
+            "nome": tupla[0],
+            "pontos": tupla[1],
+            "vitorias": tupla[2],
+            "empates": tupla[3],
+            "derrotas": tupla[4],
+            "jogos": tupla[5]
+        }
+        resp.append(time)
+    return resp
+
+
 
 def insere_partida(partida: dict):
     #escrevo o comando insert e realizo a inserção da partida na tabela partida
     #a tabela partida é composta por: id, nome_mand, id_mand, placar_mand, nome_visi, id_visi, placar_visi
-    sql = "INSERT INTO partida(nome_mand, id_mand, placar_mand, nome_visi, id_visi, placar_visi) VALUES(:nome_mand, :id_mand, :placar_mand, :nome_visi, :id_visi, :placar_visi)"
+    sql = "INSERT INTO partida(nome_mand, id_mand, placar_mand, nome_visi, id_visi, placar_visi) VALUES(:mandante, :id_mand, :placar_m, :visitante, :id_visi, :placar_v)"
 
     with get_conexao() as con:
         with con.cursor() as cur:
