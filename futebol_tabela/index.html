@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <h3>Cadastro de partidas</h3>
+        <p>Mandante <input type="text" size="10" id="mandante" />
+        X <input type="text" size="10" id="visitante" /> Visitante</p>
+        <p>
+            <input type="text" size="2" id="placar_mandante" style="margin-left: 3cm;" />
+            <input style="margin-left: 0.8cm;" type="text" size="2" id="placar_visitante" />
+        </p>
+        <p><input style="margin-left: 3cm" type="button" value="cadastra" id="btn_cadastra" /></p>
+    </form>
+    <div id="resultado">
+
+    </div>
+    <script type="text/javascript">
+        async function cadastra_partida(objeto) {
+            const url = 'http://127.0.0.1:5000/api/v1/partidas'
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(objeto) 
+                });
+
+                if (!response.ok) 
+                    throw new Error(`HTTP error! Status: ${response.status}`)
+                resp = await response.json()
+
+                div = document.getElementById("resultado")
+                console.log(resp)
+                div.innerHTML = "<pre>"+ resp.title + "</pre>"
+
+
+                const response2 = await fetch('http://127.0.0.1:5000/api/v1/times')
+                if (!response2.ok)
+                    throw new Error(`HTTP error! Status: ${response2.status}`)
+                
+                resp = await response2.json()
+                qtd = resp.length
+                i = 0
+                table = "<table><tr><td>Equipe<td>Pontos<td>Jogos</tr>"
+                while (i < qtd) {
+                    table = table + `<tr><td>${resp[i].nome}<td>${resp[i].pontos}<td>${resp[i].jogos}</tr>`
+                    i = i + 1
+                }
+                table = table + "</table>"
+                div.innerHTML = div.innerHTML + table    
+
+
+            } catch (error) {
+                console.error('Post failed:', error);
+            }
+        }
+
+        botao = document.getElementById("btn_cadastra")
+        botao.addEventListener('click', () => {
+            //alert("Clicou no botao cadastra")
+            nome_mandante = document.getElementById("mandante").value
+            nome_visitante = document.getElementById("visitante").value
+            placar_mandante = document.getElementById("placar_mandante").value
+            placar_visitante = document.getElementById("placar_visitante").value
+            obj = {
+                "mandante": nome_mandante,
+                "visitante": nome_visitante,
+                "placar_m": placar_mandante,
+                "placar_v": placar_visitante
+            }
+            console.log(obj)
+            cadastra_partida(obj)                   
+        })
+    </script>
+</body>
+</html>
