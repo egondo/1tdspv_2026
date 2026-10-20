@@ -22,7 +22,7 @@ def cadastra_partida():
         resp = {"title": "Partida cadastrada com sucesso", "status": 201}
         return resp, 201
     except Exception as erro:
-        traceback.print_exc
+        print(erro)
         resp = {"title": "Erro no cadastro", "status": 404}
         return resp, 404
 
