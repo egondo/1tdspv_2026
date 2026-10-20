@@ -7,7 +7,7 @@ create table time(
     primary key(id)
 );
 
-create table partida(
+create table partida_tdspv(
     id number generated always as identity,
     nome_mand varchar(30),
     placar_mand number(2, 0),

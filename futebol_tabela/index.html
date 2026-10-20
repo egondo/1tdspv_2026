@@ -21,7 +21,8 @@
     </div>
     <script type="text/javascript">
         async function cadastra_partida(objeto) {
-            const url = 'http://127.0.0.1:5000/api/v1/partidas'
+            //const url = 'http://127.0.0.1:5000/api/v1/partidas'
+            const url = 'https://onetdspv-2026.onrender.com/api/v1/partidas'
 
             try {
                 const response = await fetch(url, {
@@ -39,7 +40,8 @@
                 div.innerHTML = "<pre>"+ resp.title + "</pre>"
 
 
-                const response2 = await fetch('http://127.0.0.1:5000/api/v1/times')
+                //const response2 = await fetch('http://127.0.0.1:5000/api/v1/times')
+                const response2 = await fetch('https://onetdspv-2026.onrender.com/api/v1/times')
                 if (!response2.ok)
                     throw new Error(`HTTP error! Status: ${response2.status}`)
                 
@@ -70,8 +72,8 @@
             obj = {
                 "mandante": nome_mandante,
                 "visitante": nome_visitante,
-                "placar_m": placar_mandante,
-                "placar_v": placar_visitante
+                "placar_m": parseInt(placar_mandante),
+                "placar_v": parseInt(placar_visitante)
             }
             console.log(obj)
             cadastra_partida(obj)                   
