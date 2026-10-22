@@ -82,7 +82,7 @@ def recupera_todos_times() -> list:
 def insere_partida(partida: dict):
     #escrevo o comando insert e realizo a inserção da partida na tabela partida
     #a tabela partida é composta por: id, nome_mand, id_mand, placar_mand, nome_visi, id_visi, placar_visi
-    sql = "INSERT INTO partida(nome_mand, id_mand, placar_mand, nome_visi, id_visi, placar_visi) VALUES(:mandante, :id_mand, :placar_m, :visitante, :id_visi, :placar_v)"
+    sql = "INSERT INTO partida_tdspv(nome_mand, id_mand, placar_mand, nome_visi, id_visi, placar_visi) VALUES(:mandante, :id_mand, :placar_m, :visitante, :id_visi, :placar_v)"
 
     with get_conexao() as con:
         with con.cursor() as cur:

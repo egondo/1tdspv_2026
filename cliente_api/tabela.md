@@ -1,0 +1,12 @@
+|time|pontos|vitorias|empates|derrotas|jogos|
+|:---|---:|---:|---:|---:|---|
+|Brasil|7|2|1|0|3|
+|Italia|3|1|0|0|1|
+|Argentina|3|1|0|1|2|
+|Marrocos|3|1|0|0|1|
+|Peru|3|1|0|0|1|
+|EUA|2|0|2|0|2|
+|China|1|0|1|2|3|
+|Croacia|0|0|0|1|1|
+|Paraguai|0|0|0|1|1|
+|Colombia|0|0|0|1|1|
