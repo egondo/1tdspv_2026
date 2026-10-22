@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <form id="form">
         <h3>Cadastro de partidas</h3>
         <p>Mandante <input type="text" size="10" id="mandante" />
-        X <input type="text" size="10" id="visitante" /> Visitante</p>
+            X <input type="text" size="10" id="visitante" /> Visitante</p>
         <p>
             <input type="text" size="2" id="placar_mandante" style="margin-left: 3cm;" />
             <input style="margin-left: 0.8cm;" type="text" size="2" id="placar_visitante" />
@@ -21,28 +23,31 @@
     </div>
     <script type="text/javascript">
         async function cadastra_partida(objeto) {
-            const url = 'http://127.0.0.1:5000/api/v1/partidas'
+            //const url = 'http://127.0.0.1:5000/api/v1/partidas'
+            const url = 'https://onetdspv-2026.onrender.com/api/v1/partidas'
 
             try {
                 const response = await fetch(url, {
-                    method: 'POST', 
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(objeto) 
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(objeto)
                 });
 
-                if (!response.ok) 
+                if (!response.ok)
                     throw new Error(`HTTP error! Status: ${response.status}`)
                 resp = await response.json()
 
                 div = document.getElementById("resultado")
                 console.log(resp)
-                div.innerHTML = "<pre>"+ resp.title + "</pre>"
+                div.innerHTML = "<pre>" + resp.title + "</pre>"
 
 
-                const response2 = await fetch('http://127.0.0.1:5000/api/v1/times')
+                //const response2 = await fetch('http://127.0.0.1:5000/api/v1/times')
+                const url2 = 'https://onetdspv-2026.onrender.com/api/v1/times'
+                const response2 = await fetch(url2)
                 if (!response2.ok)
                     throw new Error(`HTTP error! Status: ${response2.status}`)
-                
+
                 resp = await response2.json()
                 qtd = resp.length
                 i = 0
@@ -52,7 +57,7 @@
                     i = i + 1
                 }
                 table = table + "</table>"
-                div.innerHTML = div.innerHTML + table    
+                div.innerHTML = div.innerHTML + table
 
 
             } catch (error) {
@@ -74,8 +79,9 @@
                 "placar_v": placar_visitante
             }
             console.log(obj)
-            cadastra_partida(obj)                   
+            cadastra_partida(obj)
         })
     </script>
 </body>
+
 </html>
